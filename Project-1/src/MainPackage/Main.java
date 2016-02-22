@@ -1,21 +1,52 @@
 package MainPackage;
-import java.util.Scanner;   //not sure about this, thought we needed in order to use input function
 
-	public class Main {
+import java.util.Scanner;
 
-		public static void main(String[] args) {
-		// TODO Auto-generated method stub
-			Scanner input = new Scanner(System.in);  // can now create input statements
-			System.out.println("enter a number"); //test statement 
-			int workweek = input.nextInt(); // assigns an inputed number to workweek
-			System.out.println("you entered:" + workweek);
-			int yrs2wrk = 0;                  //initializing as 0 for place holders
-			int rtrnrate = 0;
-			int yrsinret = 0;
-			int retrtrnrate = 0;
-			int reqincome = 0;
-			int mnthlySSI = 0 ;
+public class Main {
+	public static void main(String[] args) {
+		input();
+
+	}
+
+	public static void input() {
+		// Create Scanner
+		Scanner input = new Scanner(System.in);
+		// Years to Work
+		System.out.println("How many years do you plan on working?");
+		double workyears = input.nextDouble();
+		// Annual Return
+		System.out.println("What is your expected average ROI?");
+		double roi = input.nextDouble();
+		// Years Retired
+		System.out.println("How long would you like to draw?");
+		double retiredyears = input.nextDouble();
+		// Annual Retirement
+		System.out.println("What is your annual retirement?");
+		double annret = input.nextDouble();
+		// Required Income
+		System.out.println("What is your required income?");
+		double reqinc = input.nextDouble();
+		// Monthly SSI
+		System.out.println("What is your expected SSI income?");
+		double ssi = input.nextDouble();
 		
+		
+		double TotalSaving = totalsavings(reqinc, ssi, annret, retiredyears);
+		savemonthly(roi, workyears, TotalSaving);
+	}
+
+	public static double totalsavings(double reqinc, double ssi, double annret, double retiredyears) {
+		double TotalSaving = (reqinc - ssi) * ((1 - (1 / (Math.pow(1 + (annret / 100) / 12, retiredyears * 12)))))
+				/ ((annret / 100) / 12);
+		System.out.println("Total Saving: $" + TotalSaving);
+		return TotalSaving;
+	}
+
+	public static void savemonthly(double roi, double workyears, double TotalSaving) {
+		double SaveMonthly = TotalSaving
+				* (((roi / 100) / 12) / ((Math.pow(1 + (roi / 100) / 12, workyears * 12)) - 1));
+		System.out.println("Save Monthly: $" + SaveMonthly);
 	}
 
 }
+
