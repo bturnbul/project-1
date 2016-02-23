@@ -1,3 +1,4 @@
+//Lab 1 by Alex Farley, Ryan Gray, Ajay Mani, Brian Turnbull, and Samantha White
 package MainPackage;
 
 import java.util.Scanner;
